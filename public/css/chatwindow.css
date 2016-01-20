@@ -1,0 +1,64 @@
+#typingmessagediv { 
+    position: fixed; 
+    bottom:0%;
+    opacity: 1;
+    padding-bottom:10px;
+    padding-top: 10px;
+    min-height: 50px;
+    z-index: 99;
+    background: black;
+}
+
+#chatwindowdiv{
+	background-color: black;
+}
+
+#messagedisplaydiv{
+	overflow-x: hidden;
+}
+
+#messagetobesent{
+	resize: none;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+::-moz-scrollbar {
+    display: none; 
+}
+
+.sendbubble 
+{
+	position: relative;
+	min-width: 80px;
+	max-width: 600px;
+	min-height: 20px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	padding: 6px;
+	background: #ccc;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin-bottom: 2px;
+	margin-top: 1px;
+}
+
+.receivebubble 
+{
+	position: relative;
+	min-width: 80px;
+	max-width: 600px;
+	min-height: 20px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	padding: 6px;
+	background: #737373;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin-bottom: 2px;
+	margin-top: 1px;
+}

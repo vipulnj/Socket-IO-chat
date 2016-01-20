@@ -1,0 +1,13 @@
+{
+  "name": "socket-io-chat",
+  "version": "1.0.0",
+  "description": "A simple socket-IO chat application implementing group chat - computers connected to a common network.",
+  "main": "server.js",
+  "dependencies": {
+    "express": "4.13.3",
+    "body-parser":"1.14.2",
+    "socket.io":"1.4.4"
+  },
+  "author": "Vipul",
+  "license": "ISC"
+}
