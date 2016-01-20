@@ -68,7 +68,7 @@ socket.on('msgreceive', function (message, sender) {
 });
 
 socket.on('usertyping', function (username) {
-	$('#pagenamediv').append('<span><h5 style="color:green;" class="' + username + '_typinginfo">'+ username +' is typing..</h5></span>');
+	$('#pagenamediv').append('<span><h5 class="' + username + '_typinginfo typinginfocolor">'+ username +' is typing..</h5></span>');
 });
 
 socket.on('userstoppedtyping', function (username) {
