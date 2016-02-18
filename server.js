@@ -1,5 +1,6 @@
 var express = require('express'),
 	bodyParser = require('body-parser'),
+	path = require('path'),
 	app = express(),
 	server = require('http').createServer(app),
 	io = require('socket.io').listen(server);
@@ -12,15 +13,18 @@ app.use(bodyParser.urlencoded({
 	extended: true
 }));
 
-app.use('/', express.static(__dirname+'/public/'));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+// app.use('/', express.static(__dirname+'/public/'));
 
 app.get('/chat', function (req, res) {
-	res.sendFile(__dirname + '/public/enterchat.html');
+	res.render('layout', {title:'layout'})
 });
 
 io.sockets.on('connection', function (socket) {
 	console.log("Connected from " + socket.id);
-	
+
 	socket.on('disconnect', function () {
 		var user = username_sockets[socket.id];
 		var index = usernames.indexOf(user);
@@ -28,7 +32,7 @@ io.sockets.on('connection', function (socket) {
 		delete username_sockets[socket.id];
 		console.log("Disconnected from " + user);
 	});
-	
+
 	socket.on('newusr', function (newusrname) {
 		console.log("New user name request:: " + newusrname);
 		if(usernames.indexOf(newusrname) >= 0)
@@ -70,7 +74,7 @@ io.sockets.on('connection', function (socket) {
 
 	socket.on('stoppedtyping', function (username) {
 		socket.broadcast.emit('userstoppedtyping', username);
-	});	
+	});
 });
 
 server.listen(8080,'0.0.0.0');
