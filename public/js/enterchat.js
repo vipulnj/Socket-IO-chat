@@ -1,9 +1,9 @@
-var socket,
+	var socket,
 	usernameAvailable;
 
 $(document).ready(function () {
 	connect();
-	
+
 	var pagenamedivheight = $('#pagenamediv').height();
 	$('#checkusernamediv').css('padding-top', pagenamedivheight);
 
@@ -45,11 +45,6 @@ $(document).ready(function () {
 
 	$('#chataway').on('click', function () {
 		socket.emit('startchat', usernameAvailable);
-	});
-
-	socket.on('openchatwindow', function (usernameAvailable) {
-		$('#checkusernamediv').remove();
-		$('#chatwindowdiv').load("chatwindow.html");
 	});
 });
 

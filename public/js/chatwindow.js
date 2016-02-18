@@ -12,14 +12,13 @@ function messageDisplayDivCalc(){
 	var restofpageheight = $(window).height() - typingmessagedivheight - 10; //added above, deleted here
 	//alert(restofpageheight);
 	$('#messagedisplaydiv').css('height', restofpageheight);
-
 }
 
 $(document).ready(function () {
 	$('#pagenamediv').append('<h4><i class="fa fa-chevron-circle-right"></i><i> '+ usernameAvailable +'</i></h4>');
 	messageDisplayDivCalc();
 	$(window).resize(function () {
-		messageDisplayDivCalc();		
+		messageDisplayDivCalc();
 	});
 
 	$('#messagetobesent').on('keypress', function () {
@@ -29,8 +28,6 @@ $(document).ready(function () {
 	$('#messagetobesent').on('keyup', function () {
 		socket.emit('stoppedtyping', usernameAvailable);
 	});
-
-
 });
 
 $('#messagetobesent').on('keyup', function(e) {
@@ -42,7 +39,7 @@ $('#messagetobesent').on('keyup', function(e) {
 function sendmessage() {
 	var message = $('#messagetobesent').val();
 	if($('#messagetobesent').length == 1 && $('#messagetobesent').val() == '\n')
-	{	
+	{
 		alert("Empty message..");
 		$('#messagetobesent').val("");
 	}

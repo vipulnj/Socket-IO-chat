@@ -16,10 +16,14 @@ app.use(bodyParser.urlencoded({
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// app.use('/', express.static(__dirname+'/public/'));
+app.use('/', express.static(__dirname+'/public/'));
 
 app.get('/chat', function (req, res) {
-	res.render('layout', {title:'layout'})
+	res.render('checkUsername', {title:'Socket IO Chat'});
+});
+
+app.get('/chatwindow', function (req, res) {
+	res.render('chatwindow', {title:'Welcome to chat window'});
 });
 
 io.sockets.on('connection', function (socket) {
@@ -58,7 +62,10 @@ io.sockets.on('connection', function (socket) {
 			usernames.push(usernameAvailable);
 			console.log("Opening chat window for "+usernameAvailable);
 			username_sockets[socket.id] = usernameAvailable;
-			socket.emit('openchatwindow',usernameAvailable);
+
+			//trying to render jade view to open chatwindow on socket event
+			//app.render('chatwindow', {title:'Welcome to chat window'});
+			//app.redirect('/chatwindow')
 		}
 	});
 

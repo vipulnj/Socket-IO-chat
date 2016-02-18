@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    #messagedisplaycontainer.container
+        .row
+            #messagedisplaydiv
+    #typingmessagediv.col-xs-12.col-xs-offset-0.col-sm-12.col-sm-offset-0.col-md-12.col-md-offset-0
+        .container
+            .row
+                textarea#messagetobesent.form-control(placeholder='Type your message here...', autofocus='')
+    script(type='text/javascript', src='js/chatwindow.js')
