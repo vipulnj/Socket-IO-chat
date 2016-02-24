@@ -3,7 +3,8 @@ var express = require('express'),
 	path = require('path'),
 	app = express(),
 	server = require('http').createServer(app),
-	io = require('socket.io').listen(server);
+	io = require('socket.io').listen(server),
+	jade = require('jade');
 
 var usernames = [],
 	username_sockets = [];
@@ -63,9 +64,12 @@ io.sockets.on('connection', function (socket) {
 			console.log("Opening chat window for "+usernameAvailable);
 			username_sockets[socket.id] = usernameAvailable;
 
-			//trying to render jade view to open chatwindow on socket event
-			//app.render('chatwindow', {title:'Welcome to chat window'});
-			//app.redirect('/chatwindow')
+			var fn = jade.compileFile('views/chatwindow.jade', {pretty: true});
+
+		   // Render function
+		   var html = fn();
+		   //console.log(html);
+		   socket.emit('openchatwindow', html);
 		}
 	});
 

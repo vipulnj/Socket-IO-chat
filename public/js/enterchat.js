@@ -46,6 +46,11 @@ $(document).ready(function () {
 	$('#chataway').on('click', function () {
 		socket.emit('startchat', usernameAvailable);
 	});
+
+	socket.on('openchatwindow', function(html){
+		//console.log(html);
+		$('body').html(html);
+	});
 });
 
 function connect () {
