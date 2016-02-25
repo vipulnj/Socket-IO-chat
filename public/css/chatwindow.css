@@ -17,6 +17,9 @@
 	overflow-x: hidden;
 }
 
+#messagedisplaycontainer{
+	background-color: black;
+}
 #messagetobesent{
 	resize: none;
 }

@@ -14,9 +14,15 @@ function messageDisplayDivCalc(){
 	$('#messagedisplaydiv').css('height', restofpageheight);
 }
 
+function registerusername(usernameAvailable) {
+	console.log("Inside registerusername");
+	socket.emit('registerusername_chatwindow', usernameAvailable);
+}
+
 $(document).ready(function () {
 	$('#pagenamediv').append('<h4><i class="fa fa-chevron-circle-right"></i><i> '+ usernameAvailable +'</i></h4>');
 	messageDisplayDivCalc();
+	registerusername(usernameAvailable);
 	$(window).resize(function () {
 		messageDisplayDivCalc();
 	});
@@ -28,6 +34,7 @@ $(document).ready(function () {
 	$('#messagetobesent').on('keyup', function () {
 		socket.emit('stoppedtyping', usernameAvailable);
 	});
+
 });
 
 $('#messagetobesent').on('keyup', function(e) {
@@ -47,7 +54,7 @@ function sendmessage() {
 	{
 		sendbubble_ctr++;
 		var sendmsg = '<div class="col-xs-5 col-xs-offset-7 col-sm-5 col-sm-offset-7 col-md-5 col-md-offset-7 sendbubble" id = sendbubble_'+ sendbubble_ctr + '>' + message + '</div><div class="clearfix"></div>';
-		socket.emit('sndmsg', message);
+		socket.emit('sndmsg', message, usernameAvailable);
 		$('#messagedisplaydiv').append(sendmsg);
 		$('#messagetobesent').val("");
 		$('#messagedisplaydiv').animate({ scrollTop: $('#messagedisplaydiv')[0].scrollHeight}, 200);
@@ -55,7 +62,7 @@ function sendmessage() {
 }
 
 socket.on('msgreceive', function (message, sender) {
-	console.log("Message recieved :: " +message+ "from "+ sender);
+	//console.log("Message recieved :: " +message+ "from "+ sender);
 	if(sender != usernameAvailable)
 	{
 		var receivemsg = '<div class="col-xs-5 col-xs-offset-0 col-sm-5 col-sm-offset-0 col-md-5 col-md-offset-0 receivebubble"><span><b>'+ sender + '</b></span><br>'+ message + '</div><div class="clearfix"></div>';
@@ -65,9 +72,12 @@ socket.on('msgreceive', function (message, sender) {
 });
 
 socket.on('usertyping', function (username) {
-	$('#pagenamediv').append('<span><h5 class="' + username + '_typinginfo typinginfocolor">'+ username +' is typing..</h5></span>');
+	if(username != usernameAvailable)
+		$('#pagenamediv').append('<span><h5 class="' + username + '_typinginfo typinginfocolor">'+ username +' is typing..</h5></span>');
 });
 
 socket.on('userstoppedtyping', function (username) {
 	$('.'+username+'_typinginfo').remove();
 });
+
+socket.emit('registerusername', usernameAvailable);
