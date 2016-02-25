@@ -1,6 +1,6 @@
-#pagenamediv{
-	position: fixed; 
-    top:0%;
+#pagenamediv {
+    position: fixed;
+    top: 0%;
     opacity: 1;
     z-index: 99;
     background: black;
